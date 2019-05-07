@@ -14952,9 +14952,12 @@ function peg$parse(input, options) {
                 if (s0 === peg$FAILED) {
                   s0 = peg$parseAssemblyFor();
                   if (s0 === peg$FAILED) {
-                    s0 = peg$parseAssemblyLiteral();
+                    s0 = peg$parseAssemblyIf();
                     if (s0 === peg$FAILED) {
-                      s0 = peg$parseIdentifier();
+                      s0 = peg$parseAssemblyLiteral();
+                      if (s0 === peg$FAILED) {
+                        s0 = peg$parseIdentifier();
+                      }
                     }
                   }
                 }
@@ -15556,6 +15559,52 @@ function peg$parse(input, options) {
                 peg$currPos = s0;
                 s0 = peg$FAILED;
               }
+            } else {
+              peg$currPos = s0;
+              s0 = peg$FAILED;
+            }
+          } else {
+            peg$currPos = s0;
+            s0 = peg$FAILED;
+          }
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s0;
+      s0 = peg$FAILED;
+    }
+
+    return s0;
+  }
+
+  function peg$parseAssemblyIf() {
+    var s0, s1, s2, s3, s4, s5;
+
+    s0 = peg$currPos;
+    if (input.substr(peg$currPos, 2) === peg$c189) {
+      s1 = peg$c189;
+      peg$currPos += 2;
+    } else {
+      s1 = peg$FAILED;
+      if (peg$silentFails === 0) { peg$fail(peg$c190); }
+    }
+    if (s1 !== peg$FAILED) {
+      s2 = peg$parse__();
+      if (s2 !== peg$FAILED) {
+        s3 = peg$parseFunctionalAssemblyInstruction();
+        if (s3 !== peg$FAILED) {
+          s4 = peg$parse__();
+          if (s4 !== peg$FAILED) {
+            s5 = peg$parseInlineAssemblyBlock();
+            if (s5 !== peg$FAILED) {
+              s1 = [s1, s2, s3, s4, s5];
+              s0 = s1;
             } else {
               peg$currPos = s0;
               s0 = peg$FAILED;

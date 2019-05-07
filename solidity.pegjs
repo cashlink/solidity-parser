@@ -1662,6 +1662,7 @@ AssemblyItem
   / AssemblySwitch
   / AssemblyFunctionDefinition
   / AssemblyFor
+  / AssemblyIf
   / AssemblyLiteral
   / Identifier
 
@@ -1725,6 +1726,9 @@ AssemblyFunctionDefinition
 AssemblyFor
   = 'for' __ ( InlineAssemblyBlock / AssemblyExpression )
      __ AssemblyExpression __ ( InlineAssemblyBlock / AssemblyExpression ) __ InlineAssemblyBlock
+
+AssemblyIf
+  = 'if' __ FunctionalAssemblyInstruction __ InlineAssemblyBlock
 
 ReturnOpCode
   = 'return' {
